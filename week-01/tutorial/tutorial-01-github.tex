@@ -1,0 +1,886 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Week-01: GitHub Workflow Tutorial},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Week-01: GitHub Workflow Tutorial}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Table of contents}
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+
+\subsection{\texorpdfstring{Working with \texttt{course-hub} and your
+personal tutorial repository
+\texttt{tutorials-exercises}.}{Working with course-hub and your personal tutorial repository tutorials-exercises.}}\label{working-with-course-hub-and-your-personal-tutorial-repository-tutorials-exercises.}
+
+\textbf{Estimated time:} 60-75 minutes
+
+\subsection{Background}\label{background}
+
+In this course, you will use two different GitHub repositories for
+in-class work (you will use others for homework assignments):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{\texttt{course-hub}} contains course materials provided by the
+  instructor.
+\item
+  \textbf{Your personal tutorial repository} contains the tutorials and
+  exercises you complete during class.
+\end{enumerate}
+
+You will \textbf{pull} new materials from \texttt{course-hub}, but you
+will complete, save, commit, and push your work in your personal
+tutorial repository.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Learning outcomes}\label{learning-outcomes}
+
+By the end of this tutorial, you will be able to:
+
+\begin{itemize}
+\tightlist
+\item
+  distinguish between the central course repository and your personal
+  tutorial repository;
+\item
+  explain the difference between a remote GitHub repository and a local
+  repository on your computer;
+\item
+  clone a repository from GitHub to your computer;
+\item
+  pull updates from GitHub;
+\item
+  copy course materials into the correct repository;
+\item
+  review, stage, commit, and push changes;
+\item
+  confirm that your work appears on GitHub; and
+\item
+  reopen an existing RStudio Project without cloning it again.
+\end{itemize}
+
+\section{1. Create a course folder on your
+computer}\label{create-a-course-folder-on-your-computer}
+
+Call it \texttt{skill-building-in-R/}. This folder will house many
+GitHub repositories - the course-hub, the tutorials-exercises (on your
+personal account), and your homework repositories. For now, we will
+focus on the course-hub and the tutorials-exercises repositories.
+
+\texttt{skill-building-in-R/} is your parent folder.
+
+\section{2. Understand the two
+repositories}\label{understand-the-two-repositories}
+
+\subsection{\texorpdfstring{Central course repository:
+\texttt{course-hub}}{Central course repository: course-hub}}\label{central-course-repository-course-hub}
+
+The instructor controls this repository. It contains template files for
+the tutorials and exercises.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skill{-}building{-}in{-}R/ }
+\NormalTok{└── course{-}hub/}
+\NormalTok{    ├── course{-}hub.Rproj}
+\NormalTok{    ├── README.md}
+\NormalTok{    ├── week{-}01/}
+\NormalTok{    │   ├── tutorials/}
+\NormalTok{    │   └── exercises/}
+\NormalTok{    └── week{-}02/}
+\end{Highlighting}
+\end{Shaded}
+
+A trailing \texttt{/} indicates that the item is a \textbf{folder}. In
+the above folder structure, skill-building-in-R/, course-hub/, week-01/,
+and week-02/ are all folders, not files. Files will have an extension,
+like \texttt{README.md}.
+
+\texttt{course-hub.Rproj} is an Rproject file, something we will learn
+about next week.
+
+\texttt{README.md} is a file - every repository (\texttt{course-hub})
+should have a \texttt{README} file, which states what the repository
+holds. The extension \texttt{.md} just means it is a markdown file. A
+markdown file is a plain text file that uses a human-readable syntax to
+format text. We will learn more about markdown (and its newer cousin,
+quarto) next week.
+
+In the \texttt{week-01/} and \texttt{week-02/} folders (and for every
+week), there are subfolders for the tutorial templates and the exercises
+templates.
+
+In \texttt{course-hub}, you will:
+
+\begin{itemize}
+\tightlist
+\item
+  clone the repository once;
+\item
+  pull updates before class;
+\item
+  view course materials; and
+\item
+  copy the tutorial and exercise files you need.
+\end{itemize}
+
+You will \textbf{not} complete or save your work in \texttt{course-hub},
+and you do not have the ability to push changes to it.
+
+\subsection{Personal tutorial
+repository}\label{personal-tutorial-repository}
+
+You will create one personal repository for all in-class tutorials and
+exercises during the semester. This will become a foundation of code you
+can refer back to later.
+
+You can name your tutorials-exercise repo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tutorials{-}exercises}
+\end{Highlighting}
+\end{Shaded}
+
+Your repository might eventually look like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skill{-}building{-}in{-}R/}
+\NormalTok{└── tutorials{-}exercises/}
+\NormalTok{    ├── README.md}
+\NormalTok{    ├── week{-}01/}
+\NormalTok{    │   ├── tutorials/}
+\NormalTok{    │   └── exercises/}
+\NormalTok{    ├── week{-}02/}
+\NormalTok{    │   ├── tutorials/}
+\NormalTok{    │   └── exercises/}
+\NormalTok{    └── tutorials{-}exercises.Rproj}
+\end{Highlighting}
+\end{Shaded}
+
+In your personal tutorial repository, you will:
+
+\begin{itemize}
+\tightlist
+\item
+  copy tutorial and exercise templates from \texttt{course-hub};
+\item
+  complete tutorials and exercises;
+\item
+  save your work;
+\item
+  commit your changes; and
+\item
+  push your work to GitHub.
+\end{itemize}
+
+I will not be looking at or grading tutorials or exercises. These are
+for your own edification. However, your participation points will
+reflect your engagement during both.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{3. Remote and local
+repositories}\label{remote-and-local-repositories}
+
+A repository on GitHub is the \textbf{remote} copy. The copy on your
+computer is the \textbf{local} copy.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{GitHub}
+\NormalTok{remote repository stored online}
+\NormalTok{        ↓ clone or pull}
+\NormalTok{Your computer}
+\NormalTok{local repository opened in RStudio}
+\NormalTok{        ↑ push}
+\end{Highlighting}
+\end{Shaded}
+
+Important terms:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Term
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Clone} & Download a repository to your computer for the first
+time \\
+\textbf{Pull} & Download new changes into an existing local
+repository \\
+\textbf{Commit} & Save a checkpoint in the repository history on your
+computer \\
+\textbf{Push} & Upload your local commits to GitHub \\
+\end{longtable}
+}
+
+You clone a repository only once per computer. After that, you reopen
+the existing project and pull updates.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{4. Organize your course
+folders}\label{organize-your-course-folders}
+
+Your repositories should be in the parent folder (next to one another),
+not inside one another.
+
+Recommended structure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skill{-}building{-}in{-}R/}
+\NormalTok{├── course{-}hub/}
+\NormalTok{├── tutorials{-}exercises/}
+\NormalTok{├── homeworks}
+\NormalTok{    ├── homework{-}01{-}lastname/}
+\NormalTok{    └── homework{-}02{-}lastname/}
+\end{Highlighting}
+\end{Shaded}
+
+Do \textbf{not} place one Git repository inside another.
+
+Incorrect:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{course{-}hub/}
+\NormalTok{└── tutorials{-}exercises/}
+\end{Highlighting}
+\end{Shaded}
+
+Correct:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skill{-}building{-}in{-}R/}
+\NormalTok{├── course{-}hub/}
+\NormalTok{└── tutorials{-}exercises/}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\texorpdfstring{5. Clone
+\texttt{course-hub}}{5. Clone course-hub}}\label{clone-course-hub}
+
+You only need to do this once on each computer you use.
+
+\subsection{On GitHub}\label{on-github}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open the
+  \href{https://github.com/fall2026-skill-building-in-R/course-hub}{course-hub
+  repository link}
+\item
+  Click the green \textbf{Code} button.
+\item
+  Make sure \textbf{HTTPS} is selected.
+\item
+  Copy the repository URL.
+\end{enumerate}
+
+\subsection{In RStudio}\label{in-rstudio}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open RStudio.
+\item
+  Select \textbf{File → New Project}.
+\item
+  Select \textbf{Version Control}.
+\item
+  Select \textbf{Git}.
+\item
+  Paste the repository URL into \textbf{Repository URL}.
+\item
+  Choose your \texttt{skill-building-in-R/} parent folder as the project
+  directory.
+\item
+  Click \textbf{Create Project}.
+\end{enumerate}
+
+RStudio will clone the repository and open the project. A course-hub
+folder will automatically be created through this process.
+
+\subsection{Check your work}\label{check-your-work}
+
+Confirm that:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{course-hub} appears as the project name in the upper left-hand
+  corner of RStudio;
+\item
+  the Files pane shows the contents of \texttt{course-hub};
+\item
+  the Git pane is visible;
+\item
+  course-hub folder was created in \texttt{skill-building-in-R/} folder;
+  and
+\item
+  you can locate the \texttt{week-01} folder.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{6. Practice pulling an instructor
+update}\label{practice-pulling-an-instructor-update}
+
+Your instructor will make a small change to \texttt{course-hub} during
+class.
+
+When instructed:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Go to
+  \href{https://github.com/fall2026-skill-building-in-R/course-hub}{course-hub
+  repository link} and note there is no file named \texttt{test.R}
+\item
+  Make sure the \texttt{course-hub} project is open in RStudio.
+\item
+  Open the \textbf{Git} pane.
+\item
+  Click \textbf{Pull}.
+\item
+  Wait for the pull to finish.
+\item
+  Locate \texttt{test.R}.
+\item
+  Go back to
+  \href{https://github.com/fall2026-skill-building-in-R/course-hub}{course-hub
+  repository link} and note there is now a \texttt{test.R} file.
+\end{enumerate}
+
+\subsection{Key idea}\label{key-idea}
+
+\begin{quote}
+Clone once. Pull whenever the instructor updates the repository (pull at
+the start of class).
+\end{quote}
+
+Pulling does not create a second copy of the repository. It updates the
+local copy you already have.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{7. Create your personal tutorial
+repository}\label{create-your-personal-tutorial-repository}
+
+Create this repository under your \textbf{personal GitHub account}, not
+inside \texttt{course-hub}. This is where you will copy over the
+templates for the tutorials and exercises, and complete, save, commit,
+and push them.
+
+\subsection{On GitHub}\label{on-github-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Go to GitHub.
+\item
+  Click the \textbf{+} menu in the upper-right corner.
+\item
+  Select \textbf{New repository}.
+\item
+  Under \textbf{Owner}, select your personal GitHub account (this is
+  likely already selected and you will only have options here if you are
+  part of organizations).
+\item
+  Name the repository:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tutorials{-}exercises}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Add a short description, such as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{In{-}class tutorials and exercises for Skill Building in R}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Choose a `repository visibility' option. The repository visibility is
+  asking whether you want this to be a private repo (only you and
+  collaborators you add can see it) or public (anyone can see it). I
+  usually keep in-progress analyses private and make them public when I
+  submit the paper to the journal (so reviewers can see code) or a
+  preprint server (so readers can see code). For this class, it does not
+  matter as much - choose what you feel like.
+\item
+  Check \textbf{Add a README file} (this is a description of the
+  project, let's look at some other README files).
+\item
+  Click \textbf{Create repository}.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{8. Clone your tutorial
+repository}\label{clone-your-tutorial-repository}
+
+\subsection{On GitHub}\label{on-github-2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open your new tutorial repository.
+\item
+  Click \textbf{Code}.
+\item
+  Select \textbf{HTTPS}.
+\item
+  Copy the repository URL.
+\end{enumerate}
+
+\subsection{In RStudio}\label{in-rstudio-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Select \textbf{File → New Project}.
+\item
+  Select \textbf{Version Control}.
+\item
+  Select \textbf{Git}.
+\item
+  Paste the repository URL.
+\item
+  Choose the same \texttt{skill-building-in-R/} parent folder used for
+  \texttt{course-hub}.
+\item
+  Click \textbf{Create Project}.
+\end{enumerate}
+
+Your repositories should now be side by side:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skill{-}building{-}in{-}R/}
+\NormalTok{├── course{-}hub/}
+\NormalTok{└── tutorials{-}exercises/}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{9. Copy the Week 1 materials}\label{copy-the-week-1-materials}
+
+You will complete the tutorial in your personal tutorial repository, not
+in \texttt{course-hub} so you will need to copy the tutorial(s) and
+exercises for the week into your tutorials-exercises repository.
+
+\subsection{Close or save any open
+files}\label{close-or-save-any-open-files}
+
+Before copying files, save your work and close any files you are not
+using.
+
+\subsection{Using Finder or File
+Explorer}\label{using-finder-or-file-explorer}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Open the \texttt{course-hub} folder on your computer.
+\item
+  Open \texttt{week-01}.
+\item
+  Copy the \texttt{tutorials} and \texttt{exercises} folders.
+\item
+  Open your personal \texttt{tutorials-exercises} folder.
+\item
+  Create a folder named:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{week{-}01}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Paste the copied materials into \texttt{week-01}.
+\end{enumerate}
+
+Your personal repository should now look similar to course-hub, which
+looks like this for week-01:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skill{-}building{-}in{-}R/}
+\NormalTok{└── tutorials{-}exercises/}
+\NormalTok{    ├── README.md}
+\NormalTok{    └── week{-}01/}
+\NormalTok{        ├── tutorials/}
+\NormalTok{        │   └── tutorial{-}01{-}github.md}
+\NormalTok{        └── exercises/}
+\NormalTok{            └── exercises{-}01{-}github.md}
+\end{Highlighting}
+\end{Shaded}
+
+\section{10. Open Rstudio as if you are just starting
+class}\label{open-rstudio-as-if-you-are-just-starting-class}
+
+When you open RStudio for a working session, you want to open it using
+the Rproject file.
+
+To practice this:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Quit RStudio so it is not open.
+\item
+  Navigate to and open your tutorials-exercises/ folder.
+\item
+  To open this project (and thus RStudio), click on the
+  tutorials-exercises.Rproj file.
+\item
+  Confirm that the project name in the upper left-hand corner of RStudio
+  is tutorials-exercises and your files are there in the file pane.
+\end{enumerate}
+
+This is how you open RStudio. I always organize my work into RProjects
+and so when you click on the .Rproj file, it opens RStudio and your
+working directory is set to the folder (\texttt{tutorials-exercises/}).
+We will learn more about the \texttt{\{here\}} package next week which
+is used in conjunction with Rprojects to solve all working directory
+issues.
+
+\section{11. Your weekly in-class
+workflow}\label{your-weekly-in-class-workflow}
+
+At the beginning of each class:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open \texttt{course-hub}.
+\item
+  Pull the latest instructor updates.
+\item
+  Copy that week's tutorial and exercise materials.
+\item
+  Paste them into the matching week folder in your
+  \texttt{tutorials-exercises} repository.
+\end{enumerate}
+
+Then:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Open your \texttt{tutorials-exercises} RStudio Project.
+\item
+  Complete the tutorial and exercises.
+\item
+  Save your files.
+\item
+  Review your changes in the Git pane.
+\item
+  Stage the files you want to commit.
+\item
+  Commit with an informative message.
+\item
+  Push to GitHub.
+\item
+  Verify that your work appears in the remote GitHub repository.
+\end{enumerate}
+
+\section{12. Repository rules for this
+course}\label{repository-rules-for-this-course}
+
+\subsection{\texorpdfstring{In
+\texttt{course-hub}}{In course-hub}}\label{in-course-hub}
+
+You should:
+
+\begin{itemize}
+\tightlist
+\item
+  pull updates;
+\item
+  view course materials; and
+\item
+  copy starter files.
+\end{itemize}
+
+You should \textbf{not}:
+
+\begin{itemize}
+\tightlist
+\item
+  complete your work there;
+\item
+  commit changes there; or
+\item
+  push changes there.
+\end{itemize}
+
+\subsection{\texorpdfstring{In your \texttt{tutorials-exercises}
+repository}{In your tutorials-exercises repository}}\label{in-your-tutorials-exercises-repository}
+
+You should:
+
+\begin{itemize}
+\tightlist
+\item
+  complete tutorials and exercises;
+\item
+  save your work;
+\item
+  review your changes;
+\item
+  commit meaningful checkpoints; and
+\item
+  push regularly.
+\end{itemize}
+
+\section{13. One-sentence workflow}\label{one-sentence-workflow}
+
+\begin{quote}
+Pull course materials from \texttt{course-hub}, copy them into your
+personal \texttt{tutorials-exercises} repository, complete your work
+there, and then review, stage, commit, and push your changes to GitHub.
+\end{quote}
+
+
+
+
+\end{document}
