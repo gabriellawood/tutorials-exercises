@@ -99,7 +99,7 @@
 # Answer the following question:
 #
 # One Git concept I understand better now is:
-
+# One concept I understand better now is committing and pushing into Github
 
 
 # Save the file again, then repeat:
